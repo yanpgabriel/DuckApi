@@ -4,10 +4,14 @@ import dev.yanpgabriel.duck.responses.BaseResponse;
 import dev.yanpgabriel.duck.responses.TypeResponse;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/demanda")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class DemandaResource {
     
     @Inject
@@ -26,7 +30,7 @@ public class DemandaResource {
     }
 
     @POST
-    public Response create(DemandaDTO demanda) {
+    public Response create(@Valid DemandaDTO demanda) {
         BaseResponse baseResponse = new BaseResponse();
         try {
            return baseResponse.entity(service.create(demanda)).status(201).toResponse();

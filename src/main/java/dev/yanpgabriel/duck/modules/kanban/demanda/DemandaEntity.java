@@ -30,7 +30,7 @@ public class DemandaEntity extends PanacheEntityBase {
     @Column(nullable = false, name = "title")
     private String titulo;
 
-    @Column(nullable = false, name = "description")
+    @Column(name = "description")
     private String desc;
 
     @Column(nullable = false)

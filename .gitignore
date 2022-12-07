@@ -16,6 +16,7 @@ bin/
 *.ipr
 *.iml
 *.iws
+/.fleet
 
 # NetBeans
 nb-configuration.xml
@@ -38,3 +39,4 @@ nb-configuration.xml
 # Local environment
 .env
 .mvn/
+/*.env

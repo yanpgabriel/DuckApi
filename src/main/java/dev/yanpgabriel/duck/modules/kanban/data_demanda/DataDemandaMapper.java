@@ -15,8 +15,6 @@ import java.util.Objects;
 )
 public interface DataDemandaMapper {
 
-    DataDemandaMapper INSTANCE = Mappers.getMapper( DataDemandaMapper.class );
-    
     DataDemandaDTO toDataDemandaDTO(DataDemandaEntity dataDemanda);
     DataDemandaEntity toDataDemandaEntity(DataDemandaDTO dataDemanda);
     

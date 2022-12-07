@@ -5,9 +5,12 @@ import dev.yanpgabriel.duck.responses.TypeResponse;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/data-demanda")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class DataDemandaResource {
     
     @Inject

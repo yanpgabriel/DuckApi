@@ -2,8 +2,8 @@ package dev.yanpgabriel.duck.modules.user;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.yanpgabriel.duck.modules.kanban.demanda.DemandaEntity;
+import io.quarkus.elytron.security.common.BcryptUtil;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Entity(name = "tb_user")
 @Getter
@@ -26,14 +25,17 @@ public class UserEntity extends PanacheEntityBase {
     @SequenceGenerator(name = "user_seq")
     private Long id;
     
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String keycloackId;
     
     @Column
     private String fullname;
     
-    @Column
+    @Column(unique = true, nullable = false)
     private String email;
+    
+    @Column(nullable = false)
+    private String password;
 
     @JsonIgnore
     @ManyToOne
@@ -56,11 +58,6 @@ public class UserEntity extends PanacheEntityBase {
     @PrePersist
     public void prePersist() {
         this.dtcreation = LocalDateTime.now();
-    }
-
-    public Map<String, Object> toObjectMap() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.findAndRegisterModules();
-        return mapper.convertValue(this, Map.class);
+        this.password = BcryptUtil.bcryptHash(this.password);
     }
 }

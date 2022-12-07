@@ -52,16 +52,16 @@
   </dependencyManagement>
   <dependencies>
     <!-- Discord -->
-    <dependency>
-      <groupId>net.dv8tion</groupId>
-      <artifactId>JDA</artifactId>
-      <version>${jda.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.sedmelluq</groupId>
-      <artifactId>lavaplayer</artifactId>
-      <version>${lavaplayer.version}</version>
-    </dependency>
+    <!--<dependency>-->
+    <!--  <groupId>net.dv8tion</groupId>-->
+    <!--  <artifactId>JDA</artifactId>-->
+    <!--  <version>${jda.version}</version>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--  <groupId>com.sedmelluq</groupId>-->
+    <!--  <artifactId>lavaplayer</artifactId>-->
+    <!--  <version>${lavaplayer.version}</version>-->
+    <!--</dependency>-->
 
     <dependency>
       <groupId>org.reflections</groupId>
@@ -105,6 +105,18 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-jwt</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-smallrye-jwt-build</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-elytron-security-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
     </dependency>
     <dependency>
@@ -143,6 +155,10 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-hibernate-validator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-flyway</artifactId>
     </dependency>
     <dependency>
@@ -153,14 +169,14 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-oidc</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-keycloak-authorization</artifactId>
-    </dependency>
+    <!--<dependency>-->
+    <!--  <groupId>io.quarkus</groupId>-->
+    <!--  <artifactId>quarkus-oidc</artifactId>-->
+    <!--</dependency>-->
+    <!--<dependency>-->
+    <!--  <groupId>io.quarkus</groupId>-->
+    <!--  <artifactId>quarkus-keycloak-authorization</artifactId>-->
+    <!--</dependency>-->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
@@ -218,6 +234,12 @@
               <version>${org.mapstruct.version}</version>
             </path>
           </annotationProcessorPaths>
+          <showWarnings>true</showWarnings>
+          <compilerArgs>
+            <arg>
+              -Amapstruct.defaultComponentModel=cdi
+            </arg>
+          </compilerArgs>
         </configuration>
       </plugin>
       <plugin>

@@ -18,8 +18,6 @@ import java.util.Objects;
 )
 public interface DemandaMapper {
 
-    DemandaMapper INSTANCE = Mappers.getMapper( DemandaMapper.class );
-
     DemandaDTO toDemandaDTO(DemandaEntity demanda);
     DemandaEntity  toDemandaEntity(DemandaDTO demanda);
     

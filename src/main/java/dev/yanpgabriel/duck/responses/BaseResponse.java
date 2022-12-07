@@ -1,27 +1,18 @@
 package dev.yanpgabriel.duck.responses;
 
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import dev.yanpgabriel.duck.util.DuckJson;
 
 import javax.ws.rs.core.Response;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 public class BaseResponse {
 
-    private TypeResponse type = TypeResponse.SUCCESS;
-    private Integer status = 200;
     private Object entity;
+    private Integer status;
+    private TypeResponse type ;
     private List<String> extras = new ArrayList<>();
 
     public BaseResponse() {
@@ -45,6 +36,22 @@ public class BaseResponse {
         this.status = status;
         this.entity = entity;
         this.extras = extras;
+    }
+    
+    public static BaseResponse instace() {
+        return new BaseResponse(TypeResponse.UNKNOWN, 500, new ArrayList<>());
+    }
+    
+    public static BaseResponse instaceSuccess() {
+        return new BaseResponse(TypeResponse.SUCCESS, 200, null,  new ArrayList<>());
+    }
+    
+    public static BaseResponse instaceError() {
+        return new BaseResponse(TypeResponse.ERROR, 400, null,  new ArrayList<>());
+    }
+    
+    public static BaseResponse instaceServerError() {
+        return new BaseResponse(TypeResponse.SERVER_ERRO, 500, null,  new ArrayList<>());
     }
 
     public void setType(TypeResponse type) {
@@ -84,23 +91,10 @@ public class BaseResponse {
     }
 
     public String toString() {
-        // return new Gson().toJson(this);
         try {
-            ObjectMapper om = new ObjectMapper()
-            .registerModule(new ParameterNamesModule())
-            .registerModule(new Jdk8Module())
-            .registerModule(new JavaTimeModule())
-            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-            .configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true)
-            .findAndRegisterModules()
-            .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-            .setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()))
-            .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-
-            return om.writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            System.out.println("Erro ao serializar o json.");
+            return DuckJson.toJson(this);
+        } catch (RuntimeException e) {
+            return "Erro ao serializar resposta.";
         }
-        return "";
     }
 }

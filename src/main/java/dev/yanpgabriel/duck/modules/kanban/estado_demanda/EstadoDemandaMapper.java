@@ -4,7 +4,6 @@ import dev.yanpgabriel.duck.modules.kanban.demanda.DemandaEntity;
 import dev.yanpgabriel.duck.modules.kanban.demanda.DemandaMapper;
 import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +14,6 @@ import java.util.List;
 )
 public interface EstadoDemandaMapper {
 
-    EstadoDemandaMapper INSTANCE = Mappers.getMapper( EstadoDemandaMapper.class );
-    
     // EstadoDemandaDTO toEstadoDemandaDTO(EstadoDemandaEntity estadoDemanda, boolean comDemanda);
     EstadoDemandaEntity toEstadoDemandaEntity(EstadoDemandaDTO estadoDemanda);
 

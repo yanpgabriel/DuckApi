@@ -1,6 +1,5 @@
 package dev.yanpgabriel.duck;
 
-import dev.yanpgabriel.duck.modules.bot.BotService;
 import dev.yanpgabriel.duck.util.DuckApiConfig;
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
@@ -14,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
-import javax.security.auth.login.LoginException;
 import java.sql.SQLException;
 
 @ApplicationScoped
@@ -27,9 +25,6 @@ public class DuckAppLifecycle {
     
     @Inject
     DuckApiConfig duckApiConfig;
-    
-    @Inject
-    BotService botService;
     
     Server server;
     
@@ -54,19 +49,8 @@ public class DuckAppLifecycle {
             LOGGER.info("Flyway finalizado.");
         }
 
-        LOGGER.info("Inicializando BOT...");
-        if (botService.getInitOnStartUp()) {
-            try {
-                botService.init();
-            } catch (LoginException e) {
-                LOGGER.error("Bot não iniciado: Falha no login!");
-            } catch (InterruptedException e) {
-                LOGGER.error("Bot não iniciado: Falha generica.");
-            }
-        }
     }
     void onStop(@Observes ShutdownEvent event) {
-        botService.shutdown();
         server.stop();
     }
 }
