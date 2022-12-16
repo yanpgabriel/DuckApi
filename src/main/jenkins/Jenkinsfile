@@ -12,7 +12,7 @@ pipeline {
                 cleanWs()
                 sh "echo Clonando a branch selecionada '${GIT_BRANCH}'"
                 // Baixa o codigo
-                git branch: "${GIT_BRANCH}", url: 'https://github.com/yanpgabriel/DuckApi.git'
+                git branch: "${GIT_BRANCH//origin\//}", url: 'https://github.com/yanpgabriel/DuckApi.git'
             }
         }
         stage('Build') {
