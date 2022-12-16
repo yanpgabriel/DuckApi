@@ -10,6 +10,7 @@ pipeline {
             steps {
                 // Limpa o Workspace
                 cleanWs()
+                sh "echo Clonando a branch selecionada '${GIT_BRANCH}'"
                 // Baixa o codigo
                 git branch: "${GIT_BRANCH}", url: 'https://github.com/yanpgabriel/DuckApi.git'
             }
