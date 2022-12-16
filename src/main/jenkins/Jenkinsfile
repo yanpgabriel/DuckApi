@@ -26,5 +26,10 @@ pipeline {
                 archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*-SNAPSHOT.jar', followSymlinks: false, onlyIfSuccessful: true
             }
         }
+        stage('Gerar Imagem Docker') {
+            steps {
+                sh "docker --help"
+            }
+        }
     }
 }
