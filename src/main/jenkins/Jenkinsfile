@@ -11,7 +11,7 @@ pipeline {
                 // Limpa o Workspace
                 cleanWs()
                 // Baixa o codigo
-                git branch: "${GIT_BRANCH}", url: 'https://github.com/yanpgabriel/quarkus-security-jpa.git'
+                git branch: "${GIT_BRANCH}", url: 'https://github.com/yanpgabriel/DuckApi.git'
             }
         }
         stage('Build') {
