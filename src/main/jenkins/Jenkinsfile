@@ -10,9 +10,9 @@ pipeline {
             steps {
                 // Limpa o Workspace
                 cleanWs()
-                sh "echo Clonando a branch selecionada '${GIT_BRANCH}'"
+                sh "echo Clonando a branch selecionada '${BRANCH_TO_DEPLOY}'"
                 // Baixa o codigo
-                git branch: "${GIT_BRANCH}", url: 'https://github.com/yanpgabriel/DuckApi.git'
+                git branch: "${BRANCH_TO_DEPLOY}", url: 'https://github.com/yanpgabriel/DuckApi.git'
             }
         }
         stage('Build') {
