@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duck-deploy
+  namespace: duck-namespace
+  labels:
+    app: duck-deploy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: duck-deploy
+      labels:
+        app: duck-deploy
+    spec:
+      containers:
+        - name: duck-deploy
+          image: localhost:5000/duckapi-jvm:pi
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: duck-deploy
