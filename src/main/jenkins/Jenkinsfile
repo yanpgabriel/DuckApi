@@ -5,6 +5,15 @@ pipeline {
         maven 'Maven Jenkins'
     }
 
+    environment {
+        GIT_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+        COMMITER_NAME = sh(script: 'git show -s --pretty=%an', returnStdout: true).trim()
+        COMMITER_EMAIL = sh(script: 'git show -s --format=%ae', returnStdout: true).trim()
+        COMMITER_COMMENT = sh(script: 'git show -s --pretty=%B', returnStdout: true).trim()
+
+        NAMESPACE = 'duck-namespace'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -28,6 +37,11 @@ pipeline {
         }
         stage('Gerar Imagem Docker') {
             steps {
+                sh "echo ${GIT_HASH}"
+                sh "echo ${COMMITER_NAME}"
+                sh "echo ${COMMITER_EMAIL}"
+                sh "echo ${COMMITER_COMMENT}"
+                sh "echo ${NAMESPACE}"
                 sh "docker --help"
             }
         }

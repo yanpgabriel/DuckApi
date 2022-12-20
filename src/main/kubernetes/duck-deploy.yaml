@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: duck-deploy
-          image: localhost:5000/duckapi-jvm:pi
+          image: ${DOCKER_REGISTRY_HOST}/duckapi-jvm:pi
           imagePullPolicy: IfNotPresent
       restartPolicy: Always
   selector:

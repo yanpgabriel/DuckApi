@@ -3,10 +3,12 @@ kind: Service
 metadata:
   name: duck-service
   namespace: duck-namespace
+  labels:
+    app: duck-service
 spec:
   selector:
     app: duck-deploy
   ports:
-    - port: 8080
-      nodePort: 30000
+    - port: 8081
+      nodePort: 8080
   type: NodePort
