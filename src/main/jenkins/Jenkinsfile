@@ -3,6 +3,7 @@ pipeline {
 
     tools('Configurando Ferramentas') {
         maven 'Maven Jenkins'
+        docker 'Docker Jenkins'
     }
 
     environment {
@@ -12,6 +13,17 @@ pipeline {
         COMMITER_COMMENT = sh(script: 'git show -s --pretty=%B', returnStdout: true).trim()
 
         NAMESPACE = 'duck-namespace'
+    }
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5'))
+        disableConcurrentBuilds(abortPrevious: true)
+        parameters([
+            gitParameter(branch: '', branchFilter: '.*', defaultValue: 'develop', name: 'BRANCH_TO_DEPLOY',
+            quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*',
+            type: 'GitParameterDefinition', useRepository: 'https://github.com/yanpgabriel/DuckApi.git'),
+            string(defaultValue: '-DskipTests', name: 'MAVEN_ARGS', trim: true)
+        ])
     }
 
     stages {
