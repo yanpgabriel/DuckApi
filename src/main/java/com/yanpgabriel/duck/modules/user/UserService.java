@@ -23,12 +23,6 @@ public class UserService {
         return userEntity;
     }
 
-    public UserEntity findByKeycloackId(String googleTokenId) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("token", googleTokenId);
-        return UserEntity.find("keycloackId = :token", map).firstResult();
-    }
-
     public UserEntity findByEmail(String email) {
         Map<String, Object> map = new HashMap<>();
         map.put("email", email);

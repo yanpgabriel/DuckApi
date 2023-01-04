@@ -36,12 +36,6 @@ public class UserResource  {
         return BaseResponse.instaceSuccess().entity(service.get(idUser)).toResponse();
     }
 
-    @GET
-    @Path("/{keycloackId}")
-    public Response hasUser(@PathParam("keycloackId") String keycloackId) {
-        return BaseResponse.instace().entity(service.findByKeycloackId(keycloackId)).toResponse();
-    }
-
     @POST
     public Response create(UserEntity userEntity) {
         BaseResponse baseResponse = BaseResponse.instace();

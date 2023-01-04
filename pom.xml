@@ -13,7 +13,6 @@
   </developers>
   <properties>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
-    <reflections.version>0.9.11</reflections.version>
     <apache.commons.version>3.12.0</apache.commons.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
     <maven.compiler.source>11</maven.compiler.source>
@@ -28,13 +27,6 @@
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
   </properties>
-  <repositories>
-    <repository>
-      <id>dv8tion</id>
-      <name>m2-dv8tion</name>
-      <url>https://m2.dv8tion.net/releases</url>
-    </repository>
-  </repositories>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -47,11 +39,6 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
-<!--    <dependency>-->
-<!--      <groupId>org.reflections</groupId>-->
-<!--      <artifactId>reflections</artifactId>-->
-<!--      <version>${reflections.version}</version>-->
-<!--    </dependency>-->
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct</artifactId>
@@ -148,19 +135,19 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-oidc</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-keycloak-authorization</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-mailer</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-qute</artifactId>
     </dependency>
   </dependencies>
   <build>
