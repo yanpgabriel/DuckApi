@@ -40,7 +40,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                configFileProvider([configFile(fileId: 'a4023191-d4f8-4d46-a517-48515779be66', targetLocation: '/')]) {
+                configFileProvider([configFile(fileId: 'a4023191-d4f8-4d46-a517-48515779be66', targetLocation: './')]) {
                     // Roda o maven
                     sh "mvn clean package ${MAVEN_ARGS}"
                 }
