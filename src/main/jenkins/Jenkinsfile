@@ -23,8 +23,6 @@ pipeline {
         NAMESPACE = 'duck-namespace'
     }
 
-
-
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
         disableConcurrentBuilds(abortPrevious: true)
@@ -42,8 +40,10 @@ pipeline {
         }
         stage('Build') {
             steps {
-                // Roda o maven
-                sh "mvn clean package ${MAVEN_ARGS}"
+                configFileProvider([configFile(fileId: 'a4023191-d4f8-4d46-a517-48515779be66', targetLocation: '/')]) {
+                    // Roda o maven
+                    sh "mvn clean package ${MAVEN_ARGS}"
+                }
             }
         }
         stage('Arquivar artefato') {
