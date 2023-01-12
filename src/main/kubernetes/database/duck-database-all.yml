@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: duck-database-service
+  namespace: duck-namespace
+spec:
+  selector:
+    app: duck-database
+  ports:
+    - port: 5432
+  type: ClusterIP
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: duck-database
+  namespace: duck-namespace
+  labels:
+    app: duck-database
+spec:
+  containers:
+    - name: duck-database
+      image: multiuser/postgres
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 5432
+      envFrom:
+        - secretRef:
+            name: duck-database-secret
+  restartPolicy: Always

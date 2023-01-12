@@ -1,3 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: duck-service
+  namespace: duck-namespace
+  labels:
+    app: duck-service
+spec:
+  selector:
+    app: duck-deploy
+  ports:
+    - port: 8080
+      nodePort: 30080
+  type: NodePort
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,8 +32,14 @@ spec:
     spec:
       containers:
         - name: duck-deploy
-          image: ${DOCKER_REGISTRY_HOST}/duckapi-jvm:pi
+          image: duckapi-jvm:intellij
           imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: duck-secret
+
       restartPolicy: Always
   selector:
     matchLabels:
