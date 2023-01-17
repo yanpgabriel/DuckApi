@@ -63,6 +63,7 @@ public class DemandaEntity extends PanacheEntityBase {
     }
 
     public DemandaEntity updateValues(DemandaEntity demandaEntity) {
+        this.titulo = Objects.nonNull(demandaEntity.titulo) ? demandaEntity.titulo : this.titulo;
         this.user = Objects.nonNull(demandaEntity.user) ? demandaEntity.user : this.user;
         this.desc = Objects.nonNull(demandaEntity.desc) ? demandaEntity.desc : this.desc;
         this.estimativa = Objects.nonNull(demandaEntity.estimativa) ? demandaEntity.estimativa : this.estimativa;

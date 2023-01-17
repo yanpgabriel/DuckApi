@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
         - name: duck-deploy
-          image: duckapi-jvm:intellij
+          image: ${DOCKER_IMAGE}
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
