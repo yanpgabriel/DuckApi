@@ -11,7 +11,7 @@ pipeline {
 
     tools('Configurando Ferramentas') {
         maven 'Maven Jenkins'
-        dockerTool 'Docker Jenkins'
+        // dockerTool 'Docker Jenkins'
     }
 
     environment {
