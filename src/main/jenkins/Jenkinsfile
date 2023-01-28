@@ -1,12 +1,17 @@
 pipeline {
     agent any
 
+    options {
+      timestamps
+    }
+
     parameters{
         gitParameter(name: 'BRANCH_TO_DEPLOY', branch: '', branchFilter: '.*', defaultValue: 'develop',
         quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*',
         type: 'GitParameterDefinition', useRepository: 'https://github.com/yanpgabriel/DuckApi.git')
 
         string(name: 'MAVEN_ARGS', defaultValue: '-DskipTests', trim: true)
+        string(name: 'DOCKER_IMAGE', defaultValue: 'localhost:5000/duckapi-jvm:intellij', trim: true)
     }
 
     tools('Configurando Ferramentas') {
@@ -33,6 +38,12 @@ pipeline {
             steps {
                 // Limpa o Workspace
                 cleanWs()
+                sh "echo ${GIT_HASH}"
+                sh "echo ${COMMITER_NAME}"
+                sh "echo ${COMMITER_EMAIL}"
+                sh "echo ${COMMITER_COMMENT}"
+                sh "echo ${NAMESPACE}"
+                sh "echo ---"
                 sh "echo Clonando a branch selecionada '${BRANCH_TO_DEPLOY}'"
                 // Baixa o codigo
                 git branch: "${BRANCH_TO_DEPLOY}", url: 'https://github.com/yanpgabriel/DuckApi.git'
@@ -53,12 +64,12 @@ pipeline {
         }
         stage('Gerar Imagem Docker') {
             steps {
-                sh "echo ${GIT_HASH}"
-                sh "echo ${COMMITER_NAME}"
-                sh "echo ${COMMITER_EMAIL}"
-                sh "echo ${COMMITER_COMMENT}"
-                sh "echo ${NAMESPACE}"
-                sh "docker --help"
+                sh "docker buildx build --platform linux/amd64 -f src/main/docker/yan.dockerfile -t ${DOCKER_IMAGE} ."
+            }
+        }
+        stage('Publicar Imagem Docker') {
+            steps {
+                sh "docker push ${DOCKER_IMAGE}"
             }
         }
     }
