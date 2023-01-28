@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters{
-        gitParameter(name: 'BRANCH_TO_DEPLOY', branch: '', branchFilter: '.*', defaultValue: 'develop',
+        gitParameter(name: 'BRANCH_TO_DEPLOY', branch: '', branchFilter: 'origin/(.*)', defaultValue: 'develop',
         quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*',
         type: 'GitParameterDefinition', useRepository: 'https://github.com/yanpgabriel/DuckApi.git')
 
