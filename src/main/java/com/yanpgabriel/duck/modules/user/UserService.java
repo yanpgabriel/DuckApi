@@ -29,7 +29,7 @@ public class UserService {
         return UserEntity.find("email = :email", map).firstResult();
     }
     
-    public UserDTO get(Long idUser) {
+    public UserDTO getById(Long idUser) {
         return userMapper.toUserDTO(UserEntity.findById(idUser));
     }
 

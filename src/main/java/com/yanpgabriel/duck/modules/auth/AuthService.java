@@ -28,7 +28,6 @@ public class AuthService {
 
     public AuthDTO login(LoginDTO loginDTO) {
         var userDTO = this.checarCredenciais(loginDTO);
-        userDTO.setPassword("");
         // Gerar tokens
         return this.generateTokens(userDTO);
     }
@@ -37,7 +36,9 @@ public class AuthService {
         if (!mapTokens.containsKey(uuid)) {
             throw new NaoAutorizadoException("Token invalido!");
         }
-        return this.generateTokens(userService.get(mapTokens.get(uuid)));
+        Long idUserByRefreshToken = mapTokens.get(uuid);
+        UserDTO userDTO = userService.getById(idUserByRefreshToken);
+        return this.generateTokens(userDTO);
     }
 
     private AuthDTO generateTokens(UserDTO userDTO) {

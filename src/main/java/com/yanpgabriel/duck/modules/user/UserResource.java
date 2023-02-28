@@ -33,7 +33,7 @@ public class UserResource  {
     @Path("/{idUser}")
     @RolesAllowed({"DUCK_ADM", "USER_EDIT"})
     public Response get(@PathParam("idUser") Long idUser) {
-        return BaseResponse.instaceSuccess().entity(service.get(idUser)).toResponse();
+        return BaseResponse.instaceSuccess().entity(service.getById(idUser)).toResponse();
     }
 
     @POST

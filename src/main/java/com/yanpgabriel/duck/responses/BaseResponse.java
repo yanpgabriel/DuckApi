@@ -15,8 +15,8 @@ public class BaseResponse {
     private List<String> extras = new ArrayList<>();
 
     public BaseResponse() {
-        super();
     }
+
     public BaseResponse(TypeResponse type, Integer status, Object entity) {
         super();
         this.type = type;

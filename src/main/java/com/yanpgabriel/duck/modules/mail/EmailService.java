@@ -1,8 +1,8 @@
 package com.yanpgabriel.duck.modules.mail;
 
+import com.yanpgabriel.duck.util.DuckApiConfig;
 import io.quarkus.mailer.Mail;
 import io.quarkus.mailer.Mailer;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -15,14 +15,14 @@ public class EmailService {
     @Inject
     Mailer mailer;
 
-    @ConfigProperty(name = "duck.mail.admin")
-    String emailAdmin;
+    @Inject
+    DuckApiConfig duckApiConfig;
 
     public void send() {
         String dataHora = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss").format(new Date());
         mailer.send(
                 Mail.withText(
-                        emailAdmin,
+                        duckApiConfig.getEmailAdmin(),
                         String.format("[Duck-API] Alerta! - %s", dataHora),
                         String.format("Este e-mail foi gerado as %s", dataHora)
                 )
