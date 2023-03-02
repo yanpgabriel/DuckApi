@@ -5,7 +5,9 @@ import com.yanpgabriel.duck.util.DuckJson;
 
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BaseResponse {
 
@@ -13,6 +15,7 @@ public class BaseResponse {
     private Integer status;
     private TypeResponse type ;
     private List<String> extras = new ArrayList<>();
+    private Map<String, Object> headers = new HashMap<>();
 
     public BaseResponse() {
     }
@@ -53,6 +56,10 @@ public class BaseResponse {
         return new BaseResponse(TypeResponse.SERVER_ERRO, 500, null,  new ArrayList<>());
     }
 
+    public static BaseResponse instaceFile() {
+        return new BaseResponse(TypeResponse.FILE, 200, null,  new ArrayList<>());
+    }
+
     public void setType(TypeResponse type) {
         this.type = type;
     }
@@ -85,8 +92,27 @@ public class BaseResponse {
         return this;
     }
 
+    public void addHeader(String headerKey, Object headerValue) {
+        this.headers.put(headerKey, headerValue);
+    }
+    public BaseResponse header(String headerKey, Object headerValue) {
+        this.headers.put(headerKey, headerValue);
+        return this;
+    }
+    public BaseResponse headers(Map<String, Object> headers) {
+        this.headers = headers;
+        return this;
+    }
+
     public Response toResponse() {
-        return Response.status(this.status).entity(this.toString()).build();
+        Response.ResponseBuilder responseBuilder = Response.status(this.status);
+        responseBuilder = this.type != TypeResponse.FILE ? responseBuilder.entity(this.toString()) : responseBuilder.entity(this.entity);
+        if (!this.headers.isEmpty()) {
+            for (var entry : this.headers.entrySet()) {
+                responseBuilder = responseBuilder.header(entry.getKey(), entry.getValue());
+            }
+        }
+        return responseBuilder.build();
     }
 
     public String toString() {

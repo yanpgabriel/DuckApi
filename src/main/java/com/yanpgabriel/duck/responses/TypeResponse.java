@@ -2,6 +2,6 @@ package com.yanpgabriel.duck.responses;
 
 public enum TypeResponse {
 
-    UNKNOWN, SUCCESS, ERROR, SERVER_ERRO
+    UNKNOWN, FILE, SUCCESS, ERROR, SERVER_ERRO
 
 }
