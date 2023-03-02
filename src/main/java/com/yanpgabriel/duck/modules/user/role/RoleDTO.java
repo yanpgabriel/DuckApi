@@ -1,4 +1,4 @@
-package com.yanpgabriel.duck.modules.user;
+package com.yanpgabriel.duck.modules.user.role;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

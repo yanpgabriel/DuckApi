@@ -1,7 +1,12 @@
 package com.yanpgabriel.duck.modules.auth;
 
 import com.yanpgabriel.duck.exceptions.NaoAutorizadoException;
-import com.yanpgabriel.duck.modules.user.*;
+import com.yanpgabriel.duck.modules.user.UserDTO;
+import com.yanpgabriel.duck.modules.user.UserEntity;
+import com.yanpgabriel.duck.modules.user.UserMapper;
+import com.yanpgabriel.duck.modules.user.UserService;
+import com.yanpgabriel.duck.modules.user.profile.ProfileDTO;
+import com.yanpgabriel.duck.modules.user.role.RoleDTO;
 import com.yanpgabriel.duck.util.DuckApiConfig;
 import com.yanpgabriel.duck.util.DuckJWT;
 import com.yanpgabriel.duck.util.DuckJson;

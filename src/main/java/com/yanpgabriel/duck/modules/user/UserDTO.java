@@ -1,6 +1,7 @@
 package com.yanpgabriel.duck.modules.user;
 
 import com.yanpgabriel.duck.modules.kanban.demanda.DemandaDTO;
+import com.yanpgabriel.duck.modules.user.profile.ProfileDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

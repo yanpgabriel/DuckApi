@@ -1,5 +1,6 @@
-package com.yanpgabriel.duck.modules.user;
+package com.yanpgabriel.duck.modules.user.role;
 
+import com.yanpgabriel.duck.modules.user.profile.ProfileMapper;
 import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
 

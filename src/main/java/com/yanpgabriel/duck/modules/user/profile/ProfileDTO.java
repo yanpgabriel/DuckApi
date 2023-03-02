@@ -1,5 +1,6 @@
-package com.yanpgabriel.duck.modules.user;
+package com.yanpgabriel.duck.modules.user.profile;
 
+import com.yanpgabriel.duck.modules.user.role.RoleDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

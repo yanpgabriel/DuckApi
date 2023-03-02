@@ -1,4 +1,4 @@
-package com.yanpgabriel.duck.modules.user;
+package com.yanpgabriel.duck.modules.user.profile;
 
 public enum ProfileEnum {
 

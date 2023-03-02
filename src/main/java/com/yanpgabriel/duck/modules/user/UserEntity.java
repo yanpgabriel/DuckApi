@@ -3,6 +3,7 @@ package com.yanpgabriel.duck.modules.user;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yanpgabriel.duck.modules.kanban.demanda.DemandaEntity;
+import com.yanpgabriel.duck.modules.user.profile.ProfileEntity;
 import io.quarkus.elytron.security.common.BcryptUtil;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Getter;

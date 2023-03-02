@@ -1,6 +1,7 @@
 package com.yanpgabriel.duck.modules.user;
 
 import com.yanpgabriel.duck.modules.kanban.demanda.DemandaMapper;
+import com.yanpgabriel.duck.modules.user.profile.ProfileMapper;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
