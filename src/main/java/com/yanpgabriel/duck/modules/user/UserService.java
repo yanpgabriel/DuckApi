@@ -1,14 +1,19 @@
 package com.yanpgabriel.duck.modules.user;
 
+import com.yanpgabriel.duck.responses.BaseResponse;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.json.JsonNumber;
 import javax.transaction.Transactional;
+import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -16,11 +21,37 @@ public class UserService {
     
     @Inject
     UserMapper userMapper;
+
+    @Inject
+    JsonWebToken jsonWebToken;
     
     @Transactional
-    public UserEntity create(UserEntity userEntity) {
-        userEntity.persist();
-        return userEntity;
+    public Response create(UserDTO userDTO) {
+        try {
+            var userEntity = userMapper.toUserEntity(userDTO);
+            userEntity.persistAndFlush();
+            userDTO.setId(userEntity.getId());
+            return BaseResponse.instaceSuccess().status(201).entity(userDTO).extra("Usuario salvo com sucesso!").toResponse();
+        } catch (Exception e) {
+            return BaseResponse.instaceError().extra("Falha ao salvar usuario. Verifique os dados e tente novament.").toResponse();
+        }
+    }
+
+    @Transactional
+    public Response update(UserDTO userDTO) {
+        UserEntity usuarioDoBanco = UserEntity.findById(userDTO.getId());
+        usuarioDoBanco.setEmail(userDTO.getEmail());
+        usuarioDoBanco.setFullname(userDTO.getFullname());
+        if (Objects.nonNull(userDTO.getPassword())) {
+            usuarioDoBanco.setPassword(userDTO.getPassword());
+        }
+        var usuarioSalvo = userMapper.toUserDTO(usuarioDoBanco);
+        return BaseResponse
+                .instaceSuccess()
+                .status(200)
+                .entity(usuarioSalvo)
+                .extra("Usuario atualizado com sucesso!")
+                .toResponse();
     }
 
     public UserEntity findByEmail(String email) {
@@ -35,5 +66,24 @@ public class UserService {
 
     public List<UserDTO> list(Page page, Sort sort) {
         return UserEntity.findAll(sort).page(page).list().stream().map(user -> userMapper.toUserDTO((UserEntity) user)).collect(Collectors.toList());
+    }
+
+    public UserDTO obterUsuarioLogado() {
+        JsonNumber idUsuario = jsonWebToken.getClaim("idUsuario");
+        return userMapper.toUserDTO(UserEntity.findById(idUsuario.longValue()));
+    }
+
+    @Transactional
+    public Response delete(Long idUsuario) {
+        UserEntity usuario = UserEntity.findById(idUsuario);
+        if (Objects.isNull(usuario)) {
+            return BaseResponse.instaceError().status(404).extra("Usuario não encontrado.").toResponse();
+        }
+        try {
+            usuario.delete();
+            return BaseResponse.instaceSuccess().status(200).extra("Usuario deletado com sucesso!").toResponse();
+        } catch (Exception e) {
+            return BaseResponse.instaceServerError().extra(e.getMessage()).toResponse();
+        }
     }
 }

@@ -24,7 +24,7 @@ public class DataDemandaResource {
             service.delete(idDataDemanda);
             return baseResponse.status(410).toResponse();
         } catch (Exception e) {
-            return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extras(e.getMessage()).toResponse();
+            return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
         }
     }
     
@@ -34,7 +34,7 @@ public class DataDemandaResource {
         try {
            return baseResponse.entity(service.create(dataDemandaDTO)).status(201).toResponse();
        } catch (Exception e) {
-           return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extras(e.getMessage()).toResponse();
+           return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
        }
     }
     
@@ -44,7 +44,7 @@ public class DataDemandaResource {
         try {
            return baseResponse.entity(service.update(dataDemandaDTO)).status(201).toResponse();
        } catch (Exception e) {
-           return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extras(e.getMessage()).toResponse();
+           return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
        }
     }
     
@@ -54,7 +54,7 @@ public class DataDemandaResource {
         try {
             return baseResponse.entity(service.list()).status(200).toResponse();
         } catch (Exception e) {
-            return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extras(e.getMessage()).toResponse();
+            return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
         }
     }
 

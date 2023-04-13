@@ -14,7 +14,7 @@ public class NaoAutorizadoHandler implements ExceptionMapper<NaoAutorizadoExcept
         return  BaseResponse.instace()
                 .type(TypeResponse.ERROR)
                 .status(Response.Status.UNAUTHORIZED.getStatusCode())
-                .extras(e.getMessage())
+                .extra(e.getMessage())
                 .toResponse();
     }
 }

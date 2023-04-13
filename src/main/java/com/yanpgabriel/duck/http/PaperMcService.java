@@ -1,5 +1,8 @@
-package com.yanpgabriel.duck.modules.minecraft.paper;
+package com.yanpgabriel.duck.http;
 
+import com.yanpgabriel.duck.modules.minecraft.paper.PaperBuildInfo;
+import com.yanpgabriel.duck.modules.minecraft.paper.PaperInfo;
+import com.yanpgabriel.duck.modules.minecraft.paper.PaperVersionInfo;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
 import javax.ws.rs.GET;

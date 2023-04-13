@@ -1,6 +1,6 @@
 package com.yanpgabriel.duck.modules.mail;
 
-import com.yanpgabriel.duck.util.DuckApiConfig;
+import com.yanpgabriel.duck.util.config.DuckApiConfig;
 import io.quarkus.mailer.Mail;
 import io.quarkus.mailer.Mailer;
 

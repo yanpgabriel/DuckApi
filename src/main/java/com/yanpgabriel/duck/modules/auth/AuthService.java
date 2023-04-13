@@ -7,14 +7,18 @@ import com.yanpgabriel.duck.modules.user.UserMapper;
 import com.yanpgabriel.duck.modules.user.UserService;
 import com.yanpgabriel.duck.modules.user.profile.ProfileDTO;
 import com.yanpgabriel.duck.modules.user.role.RoleDTO;
-import com.yanpgabriel.duck.util.DuckApiConfig;
 import com.yanpgabriel.duck.util.DuckJWT;
 import com.yanpgabriel.duck.util.DuckJson;
+import com.yanpgabriel.duck.util.config.DuckApiConfig;
 import io.quarkus.elytron.security.common.BcryptUtil;
+import io.smallrye.jwt.auth.principal.JWTParser;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -27,9 +31,12 @@ public class AuthService {
     UserMapper userMapper;
 
     @Inject
+    JWTParser parser;
+
+    @Inject
     DuckApiConfig duckApiConfig;
 
-    private HashMap<String, Long> mapTokens = new HashMap<>();
+    private final HashMap<String, Long> mapRefreshTokens = new HashMap<>();
 
     public AuthDTO login(LoginDTO loginDTO) {
         var userDTO = this.checarCredenciais(loginDTO);
@@ -38,22 +45,29 @@ public class AuthService {
     }
 
     public AuthDTO retoken(String uuid) {
-        if (!mapTokens.containsKey(uuid)) {
+        if (!mapRefreshTokens.containsKey(uuid)) {
             throw new NaoAutorizadoException("Token invalido!");
         }
-        Long idUserByRefreshToken = mapTokens.get(uuid);
+        Long idUserByRefreshToken = mapRefreshTokens.get(uuid);
         UserDTO userDTO = userService.getById(idUserByRefreshToken);
         return this.generateTokens(userDTO);
     }
 
     private AuthDTO generateTokens(UserDTO userDTO) {
         var grupos = getGruposFromRoles(userDTO);
-        var accessToken = DuckJWT.generateAccessToken(Collections.singletonMap("user", DuckJson.toMap(DuckJson.objectMapperIgnoreNullFields(), userDTO)), grupos);
+        var accessToken = createAccessToken(userDTO, grupos);
         // var refreshToken = DuckJWT.generateRefreshToken(Collections.singletonMap("uid", userDTO.getId()));
         var refreshToken = DuckJWT.generateRefreshToken();
         var authDTO = new AuthDTO(accessToken, refreshToken);
-        mapTokens.put(refreshToken, userDTO.getId());
+        mapRefreshTokens.put(refreshToken, userDTO.getId());
         return authDTO;
+    }
+
+    private String createAccessToken(UserDTO userDTO, HashSet<String> grupos) {
+        var mapClaims = new HashMap<String, Object>();
+        mapClaims.put("idUsuario", userDTO.getId());
+        mapClaims.put("user", DuckJson.toMap(DuckJson.objectMapperIgnoreNullFields(), userDTO));
+        return DuckJWT.generateAccessToken(mapClaims, grupos);
     }
 
     private HashSet<String> getGruposFromRoles(UserDTO userDTO) {

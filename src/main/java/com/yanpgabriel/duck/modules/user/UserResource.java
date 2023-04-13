@@ -2,6 +2,7 @@ package com.yanpgabriel.duck.modules.user;
 
 import com.yanpgabriel.duck.responses.BaseResponse;
 import com.yanpgabriel.duck.responses.TypeResponse;
+import com.yanpgabriel.duck.util.config.DuckRoles;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
 
@@ -20,7 +21,7 @@ public class UserResource  {
     UserService service;
 
     @GET
-    @RolesAllowed({"DUCK_ADM", "USER_LIST"})
+    @RolesAllowed({DuckRoles.DUCK_ADM, DuckRoles.DUCK_USER_LIST})
     public Response list(@QueryParam("sort") String sortQuery,
                          @QueryParam("page") @DefaultValue("0") int pageIndex,
                          @QueryParam("size") @DefaultValue("10") int pageSize) {
@@ -30,27 +31,51 @@ public class UserResource  {
     }
 
     @GET
-    @Path("/{idUser}")
+    @Path("/{idUsuario}")
     @RolesAllowed({"DUCK_ADM", "USER_EDIT"})
-    public Response get(@PathParam("idUser") Long idUser) {
+    public Response get(@PathParam("idUsuario") Long idUser) {
         return BaseResponse.instaceSuccess().entity(service.getById(idUser)).toResponse();
     }
 
     @POST
-    public Response create(UserEntity userEntity) {
+    @RolesAllowed({DuckRoles.DUCK_ADM, DuckRoles.DUCK_USER_EDIT})
+    public Response create(UserDTO userDTO) {
         BaseResponse baseResponse = BaseResponse.instace();
         try {
-           return baseResponse.entity(service.create(userEntity)).status(201).toResponse();
+           return service.create(userDTO);
        } catch (Exception e) {
-           return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extras(e.getMessage()).toResponse();
+           return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
        }
+    }
+
+    @PUT
+    @RolesAllowed({DuckRoles.DUCK_ADM, DuckRoles.DUCK_USER_EDIT})
+    public Response update(UserDTO userDTO) {
+        BaseResponse baseResponse = BaseResponse.instace();
+        try {
+           return service.update(userDTO);
+       } catch (Exception e) {
+           return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
+       }
+    }
+
+    @DELETE
+    @Path("/{idUsuario}")
+    @RolesAllowed({DuckRoles.DUCK_ADM, DuckRoles.DUCK_USER_EDIT})
+    public Response delete(@PathParam("idUsuario") Long idUsuario) {
+        BaseResponse baseResponse = BaseResponse.instace();
+        try {
+            return service.delete(idUsuario);
+        } catch (Exception e) {
+            return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
+        }
     }
 
     @GET
     @Path("/is-admin")
-    @RolesAllowed("DUCK_ADM")
+    @RolesAllowed(DuckRoles.DUCK_ADM)
     public Response isAdmin() {
-        return BaseResponse.instace().entity("Ok").toResponse();
+        return BaseResponse.instaceSuccess().toResponse();
     }
 
 }

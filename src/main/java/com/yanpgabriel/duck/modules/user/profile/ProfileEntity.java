@@ -13,7 +13,7 @@ public class ProfileEntity extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(generator = "profile_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "profile_seq")
+    @SequenceGenerator(name = "profile_seq", allocationSize = 1)
     private Long id;
     
     @Column(nullable = false)

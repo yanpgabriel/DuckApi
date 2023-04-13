@@ -4,10 +4,7 @@ package com.yanpgabriel.duck.responses;
 import com.yanpgabriel.duck.util.DuckJson;
 
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BaseResponse {
 
@@ -45,7 +42,7 @@ public class BaseResponse {
     }
     
     public static BaseResponse instaceSuccess() {
-        return new BaseResponse(TypeResponse.SUCCESS, 200, null,  new ArrayList<>());
+        return new BaseResponse(TypeResponse.SUCCESS, 204, null,  new ArrayList<>());
     }
     
     public static BaseResponse instaceError() {
@@ -84,11 +81,15 @@ public class BaseResponse {
         return this;
     }
 
-    public void addExtras(String extras) {
+    public void addExtra(String extras) {
         this.extras.add(extras);
     }
-    public BaseResponse extras(String extras) {
-        this.extras.add(extras);
+    public BaseResponse extra(String extra) {
+        this.extras.add(extra);
+        return this;
+    }
+    public BaseResponse extras(List<String> extras) {
+        this.extras = extras;
         return this;
     }
 
@@ -105,6 +106,9 @@ public class BaseResponse {
     }
 
     public Response toResponse() {
+        if (this.type == TypeResponse.SUCCESS && Objects.nonNull(this.entity)) {
+            this.status = 200;
+        }
         Response.ResponseBuilder responseBuilder = Response.status(this.status);
         responseBuilder = this.type != TypeResponse.FILE ? responseBuilder.entity(this.toString()) : responseBuilder.entity(this.entity);
         if (!this.headers.isEmpty()) {

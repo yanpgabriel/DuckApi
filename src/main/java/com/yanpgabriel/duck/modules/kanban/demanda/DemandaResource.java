@@ -25,7 +25,7 @@ public class DemandaResource {
             service.delete(idDemanda);
             return baseResponse.status(410).toResponse();
         } catch (Exception e) {
-            return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extras(e.getMessage()).toResponse();
+            return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
         }
     }
 
@@ -35,7 +35,7 @@ public class DemandaResource {
         try {
            return baseResponse.entity(service.create(demanda)).status(201).toResponse();
        } catch (Exception e) {
-           return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extras(e.getMessage()).toResponse();
+           return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
        }
     }
 
@@ -45,7 +45,7 @@ public class DemandaResource {
         try {
            return baseResponse.entity(service.update(demanda)).status(201).toResponse();
        } catch (Exception e) {
-           return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extras(e.getMessage()).toResponse();
+           return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
        }
     }
 
@@ -55,7 +55,7 @@ public class DemandaResource {
         try {
             return baseResponse.entity(service.list()).status(200).toResponse();
         } catch (Exception e) {
-            return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extras(e.getMessage()).toResponse();
+            return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
         }
     }
 
@@ -66,7 +66,7 @@ public class DemandaResource {
         try {
             return baseResponse.entity(service.get(idDemanda)).status(200).toResponse();
         } catch (Exception e) {
-            return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extras(e.getMessage()).toResponse();
+            return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
         }
     }
 

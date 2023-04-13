@@ -1,4 +1,4 @@
-package com.yanpgabriel.duck.util;
+package com.yanpgabriel.duck.util.config;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 

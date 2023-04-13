@@ -9,6 +9,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -23,11 +24,11 @@ public class UserEntity extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(generator = "user_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "user_seq")
+    @SequenceGenerator(name = "user_seq", allocationSize = 1)
     private Long id;
     
-    @Column(unique = true)
-    private String keycloackId;
+//    @Column(unique = true)
+//    private String keycloackId;
     
     @Column
     private String fullname;
@@ -51,14 +52,11 @@ public class UserEntity extends PanacheEntityBase {
     @OneToMany(targetEntity= DemandaEntity.class, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<DemandaEntity> demandas = new ArrayList<>();
 
-    public UserEntity(String keycloackId) {
-        this.profile = find("name = 'Usuário'").firstResult();
-        this.keycloackId = keycloackId;
-    }
-
     @PrePersist
     public void prePersist() {
         this.dtcreation = LocalDateTime.now();
-        this.password = BcryptUtil.bcryptHash(this.password);
+        if (StringUtils.isNotBlank(this.password)) {
+            this.password = BcryptUtil.bcryptHash(this.password);
+        }
     }
 }

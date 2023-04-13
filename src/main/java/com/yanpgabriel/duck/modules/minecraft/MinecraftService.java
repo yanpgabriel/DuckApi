@@ -1,6 +1,6 @@
 package com.yanpgabriel.duck.modules.minecraft;
 
-import com.yanpgabriel.duck.modules.minecraft.paper.PaperMcService;
+import com.yanpgabriel.duck.http.PaperMcService;
 import com.yanpgabriel.duck.responses.BaseResponse;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 

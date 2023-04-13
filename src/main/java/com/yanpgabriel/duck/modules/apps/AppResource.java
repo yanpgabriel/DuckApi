@@ -2,6 +2,7 @@ package com.yanpgabriel.duck.modules.apps;
 
 import com.yanpgabriel.duck.responses.BaseResponse;
 import com.yanpgabriel.duck.responses.TypeResponse;
+import com.yanpgabriel.duck.util.config.DuckRoles;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
 
@@ -20,7 +21,7 @@ public class AppResource {
     AppService service;
 
     @GET
-    @RolesAllowed({"DUCK_ADM"})
+    @RolesAllowed(DuckRoles.DUCK_ADM)
     public Response list(@QueryParam("sort") String sortQuery,
                          @QueryParam("page") @DefaultValue("0") int pageIndex,
                          @QueryParam("size") @DefaultValue("10") int pageSize) {
@@ -31,18 +32,19 @@ public class AppResource {
 
     @GET
     @Path("/{idApp}")
-    @RolesAllowed({"DUCK_ADM"})
+    @RolesAllowed(DuckRoles.DUCK_ADM)
     public Response get(@PathParam("idApp") Long idApp) {
         return BaseResponse.instaceSuccess().entity(service.get(idApp)).toResponse();
     }
 
     @POST
+    @RolesAllowed(DuckRoles.DUCK_ADM)
     public Response create(AppEntity appEntity) {
         BaseResponse baseResponse = BaseResponse.instace();
         try {
            return baseResponse.entity(service.create(appEntity)).status(201).toResponse();
        } catch (Exception e) {
-           return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extras(e.getMessage()).toResponse();
+           return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
        }
     }
 }

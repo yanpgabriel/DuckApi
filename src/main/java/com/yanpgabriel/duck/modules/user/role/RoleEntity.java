@@ -11,7 +11,7 @@ public class RoleEntity extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(generator = "role_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "role_seq")
+    @SequenceGenerator(name = "role_seq",allocationSize = 1)
     private Long id;
     
     @Column(nullable = false)

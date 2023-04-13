@@ -1,6 +1,6 @@
 package com.yanpgabriel.duck;
 
-import com.yanpgabriel.duck.util.DuckApiConfig;
+import com.yanpgabriel.duck.util.config.DuckApiConfig;
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
 import io.quarkus.runtime.configuration.ProfileManager;

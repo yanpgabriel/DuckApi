@@ -17,7 +17,7 @@ public class AppEntity extends PanacheEntityBase {
 
     @Id
     @GeneratedValue(generator = "app_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "app_seq")
+    @SequenceGenerator(name = "app_seq", allocationSize = 1)
     private Long id;
 
     @Column(nullable = false)
