@@ -29,11 +29,14 @@ public class DuckAppLifecycle {
     Server server;
     
     void onStart(@Observes StartupEvent event) throws SQLException {
-        LOGGER.info("A aplicação iniciou usando o profile: {}", ProfileManager.getActiveProfile());
-        
-        LOGGER.info("Inicializando H2...");
-        server = Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers").start();
-        LOGGER.info("===================");
+        String activeProfile = ProfileManager.getActiveProfile();
+        LOGGER.info("A aplicação iniciou usando o profile: {}", activeProfile);
+
+        if (activeProfile.equalsIgnoreCase("dev")) {
+            LOGGER.info("Inicializando H2...");
+            server = Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers").start();
+            LOGGER.info("===================");
+        }
 
         if (duckApiConfig.isFlywayEnabled()) {
             LOGGER.info("Inicializando BD com Flyway...");
