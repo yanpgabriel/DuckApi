@@ -2,6 +2,7 @@ package com.yanpgabriel.duck.modules.user;
 
 import com.yanpgabriel.duck.responses.BaseResponse;
 import com.yanpgabriel.duck.responses.TypeResponse;
+import com.yanpgabriel.duck.util.DuckUtil;
 import com.yanpgabriel.duck.util.config.DuckRoles;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
@@ -26,7 +27,7 @@ public class UserResource  {
                          @QueryParam("page") @DefaultValue("0") int pageIndex,
                          @QueryParam("size") @DefaultValue("10") int pageSize) {
         Page page = Page.of(pageIndex, pageSize);
-        Sort sort = Sort.by(sortQuery);
+        Sort sort = DuckUtil.makeSort(sortQuery);
         return BaseResponse.instaceSuccess().entity(service.list(page, sort)).toResponse();
     }
 
