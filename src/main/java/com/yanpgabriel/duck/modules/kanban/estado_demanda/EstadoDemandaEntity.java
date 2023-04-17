@@ -24,7 +24,7 @@ public class EstadoDemandaEntity extends PanacheEntityBase {
     @SequenceGenerator(name = "estado_demanda_seq", allocationSize = 1)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "descricao", nullable = false)
     private String desc;
 
     @Column(nullable = false)

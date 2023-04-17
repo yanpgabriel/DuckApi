@@ -8,9 +8,9 @@ INSERT INTO PUBLIC.TB_PROFILE (ID, DTCREATION, NAME) VALUES (nextval('profile_se
 INSERT INTO PUBLIC.TB_USER (ID, DTCREATION, FULLNAME, EMAIL, PASSWORD, PROFILE_ID) VALUES (nextval('user_seq'), '2021-05-08 00:00:01.000000', 'Tester Admin', 'testeradmin@mail.com', '$2a$12$2efhB7V/SSnAZm3brj.qaOCdNnqbWzV37YsqSF5gqxUtxMSgIQb8G', 1);
 INSERT INTO PUBLIC.TB_USER (ID, DTCREATION, FULLNAME, EMAIL, PASSWORD, PROFILE_ID) VALUES (nextval('user_seq'), '2021-05-08 00:00:01.000000', 'Tester Orea', 'testerusuario@mail.com', '$2a$12$2efhB7V/SSnAZm3brj.qaOCdNnqbWzV37YsqSF5gqxUtxMSgIQb8G', 2);
 
-INSERT INTO PUBLIC.TB_ESTADO_DEMANDA (ID, DESC, DTCRIACAO, ORDEM) VALUES (nextval('estado_demanda_seq'), 'A Fazer', '2021-05-08 00:00:01.000000', 1);
-INSERT INTO PUBLIC.TB_ESTADO_DEMANDA (ID, DESC, DTCRIACAO, ORDEM) VALUES (nextval('estado_demanda_seq'), 'Fazendo', '2021-05-08 00:00:01.000000', 2);
-INSERT INTO PUBLIC.TB_ESTADO_DEMANDA (ID, DESC, DTCRIACAO, ORDEM) VALUES (nextval('estado_demanda_seq'), 'Pronto', '2021-05-08 00:00:01.000000', 3);
+INSERT INTO PUBLIC.TB_ESTADO_DEMANDA (ID, DESCRICAO, DTCRIACAO, ORDEM) VALUES (nextval('estado_demanda_seq'), 'A Fazer', '2021-05-08 00:00:01.000000', 1);
+INSERT INTO PUBLIC.TB_ESTADO_DEMANDA (ID, DESCRICAO, DTCRIACAO, ORDEM) VALUES (nextval('estado_demanda_seq'), 'Fazendo', '2021-05-08 00:00:01.000000', 2);
+INSERT INTO PUBLIC.TB_ESTADO_DEMANDA (ID, DESCRICAO, DTCRIACAO, ORDEM) VALUES (nextval('estado_demanda_seq'), 'Pronto', '2021-05-08 00:00:01.000000', 3);
 
 INSERT INTO PUBLIC.TB_APP (ID, DTCREATION, NAME, LINK, ICON) values (nextval('app_seq'), '2023-02-06 22:46:00.000000', 'CasaOS', 'http://local.yanpgabriel.com:89/#/', 'http://local.yanpgabriel.com:89/img/casa-white.2579f069.svg');
 INSERT INTO PUBLIC.TB_APP (ID, DTCREATION, NAME, LINK, ICON) values (nextval('app_seq'), '2023-02-06 22:46:00.000000', 'Portainer', 'https://local.yanpgabriel.com:9443/', 'https://icon.casaos.io/main/all/portainer-ce.png');
