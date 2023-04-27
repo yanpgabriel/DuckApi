@@ -1,7 +1,8 @@
 package com.yanpgabriel.duck.modules.financas.transacao;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+
 import java.util.List;
 import java.util.stream.Collectors;
 

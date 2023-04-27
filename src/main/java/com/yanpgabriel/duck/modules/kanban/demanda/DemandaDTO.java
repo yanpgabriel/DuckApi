@@ -2,11 +2,11 @@ package com.yanpgabriel.duck.modules.kanban.demanda;
 
 import com.yanpgabriel.duck.modules.kanban.data_demanda.DataDemandaDTO;
 import com.yanpgabriel.duck.modules.kanban.estado_demanda.EstadoDemandaDTO;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 

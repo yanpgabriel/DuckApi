@@ -6,12 +6,12 @@ import com.yanpgabriel.duck.modules.kanban.demanda.DemandaEntity;
 import com.yanpgabriel.duck.modules.user.profile.ProfileEntity;
 import io.quarkus.elytron.security.common.BcryptUtil;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

@@ -3,8 +3,8 @@ package com.yanpgabriel.duck.modules.user.profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yanpgabriel.duck.modules.user.role.RoleEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 

@@ -12,9 +12,9 @@ import com.yanpgabriel.duck.util.DuckJson;
 import com.yanpgabriel.duck.util.config.DuckApiConfig;
 import io.quarkus.elytron.security.common.BcryptUtil;
 import io.smallrye.jwt.auth.principal.JWTParser;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;

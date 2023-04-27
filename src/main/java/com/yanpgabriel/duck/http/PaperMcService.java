@@ -3,13 +3,13 @@ package com.yanpgabriel.duck.http;
 import com.yanpgabriel.duck.modules.minecraft.paper.PaperBuildInfo;
 import com.yanpgabriel.duck.modules.minecraft.paper.PaperInfo;
 import com.yanpgabriel.duck.modules.minecraft.paper.PaperVersionInfo;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 @RegisterRestClient(configKey="paper-mc")
 public interface PaperMcService {

@@ -3,9 +3,9 @@ package com.yanpgabriel.duck.modules.mail;
 import com.yanpgabriel.duck.util.config.DuckApiConfig;
 import io.quarkus.mailer.Mail;
 import io.quarkus.mailer.Mailer;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

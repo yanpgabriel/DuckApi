@@ -2,12 +2,11 @@ package com.yanpgabriel.duck.modules.kanban.demanda;
 
 import com.yanpgabriel.duck.responses.BaseResponse;
 import com.yanpgabriel.duck.responses.TypeResponse;
-
-import javax.inject.Inject;
-import javax.validation.Valid;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 @Path("/demanda")
 @Consumes(MediaType.APPLICATION_JSON)

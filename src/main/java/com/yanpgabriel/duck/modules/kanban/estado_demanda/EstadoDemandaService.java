@@ -3,10 +3,10 @@ package com.yanpgabriel.duck.modules.kanban.estado_demanda;
 import com.yanpgabriel.duck.modules.kanban.demanda.DemandaDTO;
 import com.yanpgabriel.duck.modules.kanban.demanda.DemandaEntity;
 import com.yanpgabriel.duck.modules.kanban.demanda.DemandaMapper;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;

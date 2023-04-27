@@ -5,11 +5,11 @@ import com.yanpgabriel.duck.modules.financas.categoria.CategoriaEntity;
 import com.yanpgabriel.duck.modules.financas.transacao.TransacaoEntity;
 import com.yanpgabriel.duck.modules.user.UserEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

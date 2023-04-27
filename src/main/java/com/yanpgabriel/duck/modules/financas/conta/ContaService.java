@@ -2,9 +2,9 @@ package com.yanpgabriel.duck.modules.financas.conta;
 
 import com.yanpgabriel.duck.modules.user.UserDTO;
 import com.yanpgabriel.duck.modules.user.UserService;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;

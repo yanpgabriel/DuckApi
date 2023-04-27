@@ -2,12 +2,11 @@ package com.yanpgabriel.duck.modules.mail;
 
 import com.yanpgabriel.duck.responses.BaseResponse;
 import com.yanpgabriel.duck.util.config.DuckRoles;
-
-import javax.annotation.security.RolesAllowed;
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
+import jakarta.annotation.security.RolesAllowed;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Response;
 
 @Path("/mail")
 public class EmailResource {

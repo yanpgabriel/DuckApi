@@ -2,10 +2,10 @@ package com.yanpgabriel.duck.modules.kanban.demanda;
 
 import com.yanpgabriel.duck.modules.kanban.estado_demanda.EstadoDemandaEntity;
 import com.yanpgabriel.duck.modules.user.UserEntity;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 

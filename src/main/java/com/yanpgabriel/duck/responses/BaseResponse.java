@@ -2,8 +2,8 @@ package com.yanpgabriel.duck.responses;
 
 
 import com.yanpgabriel.duck.util.DuckJson;
+import jakarta.ws.rs.core.Response;
 
-import javax.ws.rs.core.Response;
 import java.util.*;
 
 public class BaseResponse {

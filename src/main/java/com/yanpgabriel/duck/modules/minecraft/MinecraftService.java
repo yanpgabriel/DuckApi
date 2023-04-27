@@ -2,11 +2,11 @@ package com.yanpgabriel.duck.modules.minecraft;
 
 import com.yanpgabriel.duck.http.PaperMcService;
 import com.yanpgabriel.duck.responses.BaseResponse;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 @ApplicationScoped

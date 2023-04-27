@@ -2,8 +2,8 @@ package com.yanpgabriel.duck.modules.user.role;
 
 import com.yanpgabriel.duck.modules.user.profile.ProfileEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "tb_role")

@@ -2,14 +2,13 @@ package com.yanpgabriel.duck.modules.auth;
 
 import com.yanpgabriel.duck.responses.BaseResponse;
 import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.PermitAll;
+import jakarta.inject.Inject;
+import jakarta.validation.Valid;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.jwt.JsonWebToken;
-
-import javax.annotation.security.PermitAll;
-import javax.inject.Inject;
-import javax.validation.Valid;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 @Path("/auth")
 @Produces(MediaType.APPLICATION_JSON)
