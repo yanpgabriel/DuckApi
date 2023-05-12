@@ -1,11 +1,14 @@
 package com.yanpgabriel.duck.modules.financas.categoria;
 
+import com.yanpgabriel.duck.modules.financas.conta.ContaMapper;
+import com.yanpgabriel.duck.modules.financas.transacao.TransacaoMapper;
 import org.mapstruct.CollectionMappingStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(
-        collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED
+        collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED,
+        uses = {TransacaoMapper.class, ContaMapper.class}
 )
 public interface CategoriaMapper {
 

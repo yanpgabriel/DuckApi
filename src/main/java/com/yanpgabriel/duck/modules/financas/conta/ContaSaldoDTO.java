@@ -16,5 +16,9 @@ public class ContaSaldoDTO extends ContaDTO {
         super(ContaMapper.INSTANCE.toContaDTO(contaEntity));
         this.saldoAtual = saldoAtual;
     }
+    public ContaSaldoDTO(Integer saldoAtual, ContaEntity contaEntity) {
+        super(ContaMapper.INSTANCE.toContaDTO(contaEntity));
+        this.saldoAtual = BigDecimal.valueOf(saldoAtual);
+    }
 
 }

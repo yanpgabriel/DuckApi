@@ -6,6 +6,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +44,7 @@ public class DemandaService {
     
     public List<DemandaDTO> list() {
         List<DemandaEntity> demandas = DemandaEntity.listAll();
-        return demandas.stream().map(demandaMapper::toDemandaDTO).collect(Collectors.toList());
+        return demandas.stream().map(demandaMapper::toDemandaDTO).sorted(Comparator.comparingInt(DemandaDTO::getOrdem)).collect(Collectors.toList());
     }
     
     public DemandaDTO get(Long idDemanda) {

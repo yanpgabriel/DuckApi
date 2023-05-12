@@ -1,6 +1,6 @@
 package com.yanpgabriel.duck.modules.kanban.estado_demanda;
 
-import com.yanpgabriel.duck.modules.kanban.demanda.DemandaEntity;
+import com.yanpgabriel.duck.modules.kanban.demanda.DemandaDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +16,6 @@ public class EstadoDemandaDTO {
     private String desc;
     private Integer ordem;
     private LocalDateTime dtCriacao;
-    private List<DemandaEntity> demandas = new ArrayList<>();
+    private List<DemandaDTO> demandas = new ArrayList<>();
     
 }

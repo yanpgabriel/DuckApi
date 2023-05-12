@@ -25,6 +25,7 @@ public class DemandaDTO {
     private String desc;
     @NotNull(message = "A demanda precisa ter uma estimativa.")
     private Integer estimativa;
+    private Integer ordem;
     private LocalDateTime dtCriacao;
     private List<DataDemandaDTO> datasDemanda;
     

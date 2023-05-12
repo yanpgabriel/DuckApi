@@ -45,4 +45,11 @@ public class CategoriaResource {
         return BaseResponse.instaceSuccess().entity(service.obterTodasDeDespesa()).toResponse();
     }
 
+    @GET
+    @Path("/transacao")
+    @Authenticated
+    public Response obterTodasDeTransacao() {
+        return BaseResponse.instaceSuccess().entity(service.obterTodasDeTransacao()).toResponse();
+    }
+
 }

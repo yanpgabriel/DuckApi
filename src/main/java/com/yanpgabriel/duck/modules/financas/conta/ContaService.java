@@ -25,14 +25,15 @@ public class ContaService {
     public List<ContaSaldoDTO> obterSaldos() {
         UserDTO userDTO = userService.obterUsuarioLogado();
         List<ContaSaldoDTO> result = ContaEntity.getEntityManager()
-                .createQuery(
-                        "SELECT new com.yanpgabriel.duck.modules.financas.conta.ContaSaldoDTO(c.saldoInicial + COALESCE(SUM(t.valor), 0.00), c) FROM tb_conta c " +
-                        "LEFT JOIN tb_transacao t ON t.conta = c AND t.efetivado IS TRUE " +
-                        "WHERE c.usuario.id = :idUsuario " +
-                        "GROUP BY c " +
-                        "ORDER BY c.nome ASC", ContaSaldoDTO.class)
-                .setParameter("idUsuario", userDTO.getId())
-                .getResultList();
+            .createQuery(
+                "SELECT new com.yanpgabriel.duck.modules.financas.conta.ContaSaldoDTO(c.saldoInicial + COALESCE(SUM(t.valor), 0.00), c) " +
+                "FROM tb_conta c " +
+                "LEFT JOIN tb_transacao t ON t.conta = c AND t.efetivado = TRUE " +
+                "WHERE c.usuario.id = :idUsuario " +
+                "GROUP BY c " +
+                "ORDER BY c.nome ASC ", ContaSaldoDTO.class)
+            .setParameter("idUsuario", userDTO.getId())
+            .getResultList();
         return result;
     }
 

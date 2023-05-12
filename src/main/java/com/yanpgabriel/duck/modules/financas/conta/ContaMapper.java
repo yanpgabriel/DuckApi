@@ -21,8 +21,8 @@ public interface ContaMapper {
     ContaDTO toContaDTO(ContaEntity contaEntity);
     ContaEntity toContaEntity(ContaDTO contaDTO);
 
-    @Mapping(target = "idUsuario", source = "usuario.id")
-    @Mapping(target = "idCategoria", source = "categoria.id")
-    ContaSaldoDTO toSaldoDTO(ContaEntity contaEntity);
+//    @Mapping(target = "idUsuario", source = "usuario.id")
+//    @Mapping(target = "idCategoria", source = "categoria.id")
+//    ContaSaldoDTO toSaldoDTO(ContaEntity contaEntity);
 
 }

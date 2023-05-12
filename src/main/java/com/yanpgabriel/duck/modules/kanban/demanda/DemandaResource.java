@@ -22,7 +22,7 @@ public class DemandaResource {
         BaseResponse baseResponse = new BaseResponse();
         try {
             service.delete(idDemanda);
-            return baseResponse.status(410).toResponse();
+            return baseResponse.status(204).toResponse();
         } catch (Exception e) {
             return baseResponse.type(TypeResponse.SERVER_ERRO).status(500).extra(e.getMessage()).toResponse();
         }

@@ -28,4 +28,8 @@ public class CategoriaService {
         return CategoriaEntity.list("tipo = ?1", TipoCategoriaEnum.DESPESA).stream().map(categoria -> mapper.toCategoriaDTO((CategoriaEntity) categoria)).collect(Collectors.toList());
     }
 
+    public List<CategoriaDTO> obterTodasDeTransacao() {
+        return CategoriaEntity.list("tipo in (?1, ?2)", TipoCategoriaEnum.RECEITA, TipoCategoriaEnum.DESPESA).stream().map(categoria -> mapper.toCategoriaDTO((CategoriaEntity) categoria)).collect(Collectors.toList());
+    }
+
 }

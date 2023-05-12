@@ -7,6 +7,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -46,9 +48,13 @@ public class EstadoDemandaService {
     
     public List<EstadoDemandaDTO> list(boolean comDemandas) {
         List<EstadoDemandaEntity> estadoDemandaEntities = EstadoDemandaEntity.listAll();
-        return estadoDemandaEntities.stream().map(estado -> {
-            return estadoDemandaMapper.toEstadoDemandaDTO(estado, comDemandas);
-        }).collect(Collectors.toList());
+        return estadoDemandaEntities.stream()
+                .peek(estado -> {
+                    if (!comDemandas) estado.setDemandas(Collections.emptyList());
+                })
+                .map(estado -> estadoDemandaMapper.toEstadoDemandaDTO(estado))
+                .peek(estado -> estado.getDemandas().sort(Comparator.comparingInt(DemandaDTO::getOrdem)))
+                .collect(Collectors.toList());
     }
     
     public Map<Long, List<DemandaDTO>> listPorEstados(Long idUser) {

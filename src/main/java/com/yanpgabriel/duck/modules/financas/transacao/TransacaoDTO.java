@@ -1,5 +1,7 @@
 package com.yanpgabriel.duck.modules.financas.transacao;
 
+import com.yanpgabriel.duck.modules.financas.categoria.CategoriaDTO;
+import com.yanpgabriel.duck.modules.financas.conta.ContaDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,8 +18,11 @@ public class TransacaoDTO {
     private Boolean ignorar = false;
     private LocalDateTime dtCriacao;
     private LocalDateTime dtExclusao;
-    private Long idConta;
     private Long idCategoria;
+    private Long idConta;
     private Long idUsuario;
+
+    private CategoriaDTO categoria;
+    private ContaDTO conta;
 
 }

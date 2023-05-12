@@ -38,6 +38,9 @@ public class DemandaEntity extends PanacheEntityBase {
 
     @Column(nullable = false)
     private LocalDateTime dtCriacao;
+
+    @Column(nullable = false)
+    private Integer ordem;
     
     @OneToMany(targetEntity= DataDemandaEntity.class, mappedBy = "demanda", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<DataDemandaEntity> datasDemanda = new ArrayList<>();
@@ -69,6 +72,7 @@ public class DemandaEntity extends PanacheEntityBase {
         this.estimativa = Objects.nonNull(demandaEntity.estimativa) ? demandaEntity.estimativa : this.estimativa;
         this.dtCriacao = Objects.nonNull(demandaEntity.dtCriacao) ? demandaEntity.dtCriacao : this.dtCriacao;
         this.estado = Objects.nonNull(demandaEntity.estado) ? demandaEntity.estado : this.estado;
+        this.ordem = Objects.nonNull(demandaEntity.ordem) ? demandaEntity.ordem : this.ordem;
         return this;
     }
 }
