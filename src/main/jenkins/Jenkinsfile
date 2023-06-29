@@ -40,7 +40,6 @@ pipeline {
                 sh "echo ${COMMITER_EMAIL}"
                 sh "echo ${COMMITER_COMMENT}"
                 sh "echo ${NAMESPACE}"
-                sh "echo ---"
                 sh "echo Clonando a branch selecionada '${BRANCH_TO_DEPLOY}'"
                 // Baixa o codigo
                 git branch: "${BRANCH_TO_DEPLOY}", url: 'https://github.com/yanpgabriel/DuckApi.git'
