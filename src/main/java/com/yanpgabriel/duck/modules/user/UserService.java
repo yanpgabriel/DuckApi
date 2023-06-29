@@ -1,5 +1,6 @@
 package com.yanpgabriel.duck.modules.user;
 
+import com.yanpgabriel.duck.modules.user.profile.ProfileEntity;
 import com.yanpgabriel.duck.responses.BaseResponse;
 import io.quarkus.panache.common.Page;
 import io.quarkus.panache.common.Sort;
@@ -44,6 +45,11 @@ public class UserService {
         usuarioDoBanco.setFullname(userDTO.getFullname());
         if (Objects.nonNull(userDTO.getPassword())) {
             usuarioDoBanco.setPassword(userDTO.getPassword());
+        }
+        if (Objects.nonNull(userDTO.getProfile())) {
+            usuarioDoBanco.setProfile(ProfileEntity.findById(userDTO.getProfile().getId()));
+        } else {
+            usuarioDoBanco.setProfile(null);
         }
         var usuarioSalvo = userMapper.toUserDTO(usuarioDoBanco);
         return BaseResponse
