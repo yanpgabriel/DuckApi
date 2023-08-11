@@ -1,6 +1,7 @@
 package com.yanpgabriel.duck;
 
 import com.yanpgabriel.duck.util.config.DuckApiConfig;
+import com.yanpgabriel.duck.util.config.HibernateConfig;
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
 import io.quarkus.runtime.configuration.ProfileManager;
@@ -22,20 +23,26 @@ public class DuckAppLifecycle {
 
     @Inject
     Flyway flyway;
-    
+
     @Inject
     DuckApiConfig duckApiConfig;
-    
+
+    @Inject
+    HibernateConfig hibernateConfig;
+
     Server server;
     
     void onStart(@Observes StartupEvent event) throws SQLException {
+        LOGGER.info("================================================================================================");
         String activeProfile = ProfileManager.getActiveProfile();
-        LOGGER.info("A aplicação iniciou usando o profile: {}", activeProfile);
+        LOGGER.info("# A aplicação iniciou usando o profile: {}", activeProfile);
+        LOGGER.info("# Hibernate scripts: {}", hibernateConfig.sqlLoadScript);
+        LOGGER.info("# Hibernate Database Generation: {}", hibernateConfig.databaseGeneration);
 
         if (activeProfile.equalsIgnoreCase("dev")) {
             LOGGER.info("Inicializando H2...");
             server = Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers").start();
-            LOGGER.info("===================");
+            LOGGER.info("H2 Iniciado");
         }
 
         if (duckApiConfig.isFlywayEnabled()) {
@@ -51,7 +58,7 @@ public class DuckAppLifecycle {
             }
             LOGGER.info("Flyway finalizado.");
         }
-
+        LOGGER.info("================================================================================================");
     }
     void onStop(@Observes ShutdownEvent event) {
         server.stop();

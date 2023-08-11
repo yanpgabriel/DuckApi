@@ -1,9 +1,9 @@
 package com.yanpgabriel.duck.util.config;
 
-import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Singleton;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-@ApplicationScoped
+@Singleton
 public class DuckApiConfig {
 
     @ConfigProperty(name = "duck.flyway")
