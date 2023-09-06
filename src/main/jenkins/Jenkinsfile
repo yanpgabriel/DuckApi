@@ -42,6 +42,11 @@ pipeline {
                 git branch: "${BRANCH_TO_DEPLOY}", url: 'https://github.com/yanpgabriel/DuckApi.git'
             }
         }
+        stage('Analise SonarQube') {
+            withSonarQubeEnv() {
+                sh "mvn clean verify sonar:sonar -Dsonar.projectKey=duckapi"
+            }
+        }
         stage('Build') {
             steps {
                 configFileProvider([configFile(fileId: 'a4023191-d4f8-4d46-a517-48515779be66', targetLocation: './')]) {
