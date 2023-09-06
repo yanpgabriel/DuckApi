@@ -43,8 +43,10 @@ pipeline {
             }
         }
         stage('Analise SonarQube') {
-            withSonarQubeEnv() {
-                sh "mvn clean verify sonar:sonar -Dsonar.projectKey=duckapi"
+            steps {
+                withSonarQubeEnv() {
+                    sh "mvn clean verify sonar:sonar -Dsonar.projectKey=duckapi"
+                }
             }
         }
         stage('Build') {
