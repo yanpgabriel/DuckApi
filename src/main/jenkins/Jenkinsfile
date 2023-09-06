@@ -44,7 +44,7 @@ pipeline {
         }
         stage('Analise SonarQube') {
             steps {
-                withSonarQubeEnv() {
+                withSonarQubeEnv(credentialsId: 'TokenSonarJenkins') {
                     sh "mvn clean verify sonar:sonar -Dsonar.projectKey=duckapi"
                 }
             }
