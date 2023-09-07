@@ -19,7 +19,7 @@ public class EmailService {
     DuckApiConfig duckApiConfig;
 
     public void send() {
-        String dataHora = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss").format(new Date());
+        String dataHora = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
         mailer.send(
                 Mail.withText(
                         duckApiConfig.getEmailAdmin(),
