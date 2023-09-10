@@ -3,7 +3,7 @@ version: '3.8'
 services:
   db:
     build:
-      context: src/main/docker/database_files
+      context: .yan/database_files
       dockerfile: multidb_postgres.dockerfile
     image: multiuser/postgres
     ports:
@@ -24,7 +24,7 @@ services:
 #  back:
 #    build:
 #      context: .
-#      dockerfile: src/main/docker/yan.dockerfile
+#      dockerfile: infra/docker/Duck.Dockerfile
 #    image: duck/api-bot
 #    ports:
 #      - "9999:8080"

@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     parameters{
-        gitParameter(name: 'BRANCH_TO_DEPLOY', branch: '', branchFilter: 'origin/(.*)', defaultValue: 'develop',
+        gitParameter(name: 'BRANCH_TO_DEPLOY', branch: '', branchFilter: 'origin/(.*)', defaultValue: 'main',
         quickFilterEnabled: false, selectedValue: 'NONE', sortMode: 'NONE', tagFilter: '*',
         type: 'GitParameterDefinition', useRepository: 'https://github.com/yanpgabriel/DuckApi.git')
 
         string(name: 'MAVEN_ARGS', defaultValue: '-DskipTests', trim: true)
         string(name: 'DOCKER_HOST', defaultValue: '192.168.0.69:2375', trim: true)
         string(name: 'DOCKER_IMAGE', defaultValue: 'localhost:5000/duckapi-jvm:pi', trim: true)
-        string(name: 'DOCKER_IMAGE_PATH', defaultValue: 'src/main/docker/yan.dockerfile', trim: true)
+        string(name: 'DOCKER_IMAGE_PATH', defaultValue: 'infra/docker/Duck.Dockerfile', trim: true)
     }
 
     tools('Configurando Ferramentas') {
