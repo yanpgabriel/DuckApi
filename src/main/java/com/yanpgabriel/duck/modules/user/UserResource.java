@@ -12,6 +12,8 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.util.UUID;
+
 @Path("/user")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -33,7 +35,7 @@ public class UserResource  {
     @GET
     @Path("/{idUsuario}")
     @RolesAllowed({DuckRoles.DUCK_ADM, DuckRoles.DUCK_USER_EDIT})
-    public Response get(@PathParam("idUsuario") Long idUser) {
+    public Response get(@PathParam("idUsuario") UUID idUser) {
         return BaseResponse.instaceSuccess().entity(service.getById(idUser)).toResponse();
     }
 
@@ -62,7 +64,7 @@ public class UserResource  {
     @DELETE
     @Path("/{idUsuario}")
     @RolesAllowed({DuckRoles.DUCK_ADM, DuckRoles.DUCK_USER_EDIT})
-    public Response delete(@PathParam("idUsuario") Long idUsuario) {
+    public Response delete(@PathParam("idUsuario") UUID idUsuario) {
         BaseResponse baseResponse = BaseResponse.instace();
         try {
             return service.delete(idUsuario);

@@ -11,10 +11,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -66,7 +63,7 @@ public class UserService {
         return UserEntity.find("email = :email", map).firstResult();
     }
     
-    public UserDTO getById(Long idUser) {
+    public UserDTO getById(UUID idUser) {
         return userMapper.toUserDTO(UserEntity.findById(idUser));
     }
 
@@ -80,7 +77,7 @@ public class UserService {
     }
 
     @Transactional
-    public Response delete(Long idUsuario) {
+    public Response delete(UUID idUsuario) {
         UserEntity usuario = UserEntity.findById(idUsuario);
         if (Objects.isNull(usuario)) {
             return BaseResponse.instaceError().status(404).extra("Usuario não encontrado.").toResponse();

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -17,6 +18,6 @@ public class CategoriaDTO {
     private LocalDateTime dtExclusao;
     private TipoCategoriaEnum tipo;
     private Long idCategoriaPai;
-    private Long idUsuario;
+    private UUID idUsuario;
 
 }

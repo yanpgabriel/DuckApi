@@ -15,10 +15,7 @@ import io.smallrye.jwt.auth.principal.JWTParser;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
@@ -36,7 +33,7 @@ public class AuthService {
     @Inject
     DuckApiConfig duckApiConfig;
 
-    private final HashMap<String, Long> mapRefreshTokens = new HashMap<>();
+    private final HashMap<String, UUID> mapRefreshTokens = new HashMap<>();
 
     public AuthDTO login(LoginDTO loginDTO) {
         var userDTO = this.checarCredenciais(loginDTO);
@@ -48,7 +45,7 @@ public class AuthService {
         if (!mapRefreshTokens.containsKey(uuid)) {
             throw new NaoAutorizadoException("Token invalido!");
         }
-        Long idUserByRefreshToken = mapRefreshTokens.get(uuid);
+        UUID idUserByRefreshToken = mapRefreshTokens.get(uuid);
         UserDTO userDTO = userService.getById(idUserByRefreshToken);
         return this.generateTokens(userDTO);
     }

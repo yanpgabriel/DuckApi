@@ -4,17 +4,23 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yanpgabriel.duck.modules.user.role.RoleEntity;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity(name = "tb_profile")
 public class ProfileEntity extends PanacheEntityBase {
 
     @Id
-    @GeneratedValue(generator = "profile_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "profile_seq", allocationSize = 1)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    private UUID id;
     
     @Column(nullable = false)
     private String name;
@@ -22,7 +28,6 @@ public class ProfileEntity extends PanacheEntityBase {
     @Column(nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dtcreation;
-
 
     @ManyToMany
     @JoinTable(
@@ -37,35 +42,4 @@ public class ProfileEntity extends PanacheEntityBase {
         this.dtcreation = LocalDateTime.now();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDateTime getDtcreation() {
-        return dtcreation;
-    }
-
-    public void setDtcreation(LocalDateTime dtcreation) {
-        this.dtcreation = dtcreation;
-    }
-
-    public List<RoleEntity> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<RoleEntity> roles) {
-        this.roles = roles;
-    }
 }

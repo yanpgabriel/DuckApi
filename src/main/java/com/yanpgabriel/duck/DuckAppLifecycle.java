@@ -4,6 +4,7 @@ import com.yanpgabriel.duck.util.config.DuckApiConfig;
 import com.yanpgabriel.duck.util.config.HibernateConfig;
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
+import io.quarkus.runtime.configuration.ConfigUtils;
 import io.quarkus.runtime.configuration.ProfileManager;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
@@ -15,6 +16,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class DuckAppLifecycle {
@@ -34,12 +38,12 @@ public class DuckAppLifecycle {
     
     void onStart(@Observes StartupEvent event) throws SQLException {
         LOGGER.info("================================================================================================");
-        String activeProfile = ProfileManager.getActiveProfile();
-        LOGGER.info("# A aplicação iniciou usando o profile: {}", activeProfile);
+        var activeProfiles = ConfigUtils.getProfiles();
+        LOGGER.info("# A aplicação iniciou usando o profile: {}", String.join(", ", activeProfiles));
         LOGGER.info("# Hibernate scripts: {}", hibernateConfig.sqlLoadScript);
         LOGGER.info("# Hibernate Database Generation: {}", hibernateConfig.databaseGeneration);
 
-        if (activeProfile.equalsIgnoreCase("dev")) {
+        if (activeProfiles.contains("dev")) {
             LOGGER.info("Inicializando H2...");
             server = Server.createTcpServer("-tcpPort", "9092", "-tcpAllowOthers").start();
             LOGGER.info("H2 Iniciado");

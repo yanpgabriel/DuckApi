@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -20,7 +21,7 @@ public class TransacaoDTO {
     private LocalDateTime dtExclusao;
     private Long idCategoria;
     private Long idConta;
-    private Long idUsuario;
+    private UUID idUsuario;
 
     private CategoriaDTO categoria;
     private ContaDTO conta;

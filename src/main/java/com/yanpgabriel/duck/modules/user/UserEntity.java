@@ -15,20 +15,17 @@ import org.apache.commons.lang3.StringUtils;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-@Entity(name = "tb_user")
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity(name = "tb_user")
 public class UserEntity extends PanacheEntityBase {
 
     @Id
-    @GeneratedValue(generator = "user_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "user_seq", allocationSize = 1)
-    private Long id;
-    
-//    @Column(unique = true)
-//    private String keycloackId;
+    @GeneratedValue(generator = "UUID")
+    private UUID id;
     
     @Column
     private String fullname;

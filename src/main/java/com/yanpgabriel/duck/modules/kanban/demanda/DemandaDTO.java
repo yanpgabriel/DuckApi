@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -16,7 +17,7 @@ public class DemandaDTO {
 
     private Long id;
     @NotNull(message = "Você deve vincular um usuario a essa demanda.")
-    private Long idUser;
+    private UUID idUser;
     @NotNull(message = "A demanda precisa ter um estado.")
     private Long idEstado;
     private EstadoDemandaDTO estadoDemanda;

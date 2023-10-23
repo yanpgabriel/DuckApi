@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class DuckJson {
     
-    private static ObjectMapper objectMapper;
+    private static final ObjectMapper objectMapper;
 
     static {
         objectMapper = applyDefaultConfig(new ObjectMapper());

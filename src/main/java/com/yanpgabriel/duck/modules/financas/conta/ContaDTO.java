@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -19,7 +20,7 @@ public class ContaDTO {
     private LocalDateTime dtCriacao;
     private LocalDateTime dtArquivacao;
     private Long idCategoria;
-    private Long idUsuario;
+    private UUID idUsuario;
 
     public ContaDTO(ContaDTO contaDTO) {
         this.id = contaDTO.getId();
