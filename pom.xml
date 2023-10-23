@@ -15,10 +15,10 @@
     <gson.version>2.10.1</gson.version>
     <apache.commons.version>3.12.0</apache.commons.version>
     <compiler-plugin.version>3.8.1</compiler-plugin.version>
-    <lombok.version>1.18.22</lombok.version>
+    <lombok.version>1.18.30</lombok.version>
     <maven.compiler.parameters>true</maven.compiler.parameters>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>21</maven.compiler.source>
+    <maven.compiler.target>21</maven.compiler.target>
     <surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
     <org.mapstruct.version>1.5.5.Final</org.mapstruct.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,8 +26,8 @@
 
     <quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-    <quarkus.platform.version>3.0.1.Final</quarkus.platform.version>
-    <quarkus-plugin.version>3.0.1.Final</quarkus-plugin.version>
+    <quarkus.platform.version>3.4.3</quarkus.platform.version>
+    <quarkus-plugin.version>3.4.3</quarkus-plugin.version>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -214,7 +214,8 @@
           </annotationProcessorPaths>
           <showWarnings>true</showWarnings>
           <compilerArgs>
-            <arg>-Amapstruct.defaultComponentModel=cdi</arg>
+            <arg>-Amapstruct.defaultComponentModel=jakarta-cdi</arg>
+            <arg>-Amapstruct.unmappedTargetPolicy=IGNORE</arg>
           </compilerArgs>
         </configuration>
       </plugin>
