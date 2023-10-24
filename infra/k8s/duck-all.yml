@@ -1,46 +1,27 @@
 apiVersion: v1
-kind: Service
+kind: Namespace
 metadata:
-  name: duck-service
-  namespace: duck-namespace
+  name: duck-namespace
   labels:
-    app: duck-service
-spec:
-  selector:
-    app: duck-deploy
-  ports:
-    - port: 8080
-      nodePort: 30080
-  type: NodePort
+    name: duck-namespace
 
 ---
 
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: duck-deploy
+  name: duck-api
   namespace: duck-namespace
   labels:
-    app: duck-deploy
+    app: duck-api
 spec:
-  replicas: 1
-  template:
-    metadata:
-      name: duck-deploy
-      labels:
-        app: duck-deploy
-    spec:
-      containers:
-        - name: duck-deploy
-          image: ${DOCKER_IMAGE}
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 8080
-          envFrom:
-            - secretRef:
-                name: duck-secret
-
-      restartPolicy: Always
-  selector:
-    matchLabels:
-      app: duck-deploy
+  containers:
+    - name: duck-api
+      image: rasp.local:500/duckapi-jvm
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 8080
+      envFrom:
+        - configMapRef:
+            name: duck-cm-env
+  restartPolicy: Never

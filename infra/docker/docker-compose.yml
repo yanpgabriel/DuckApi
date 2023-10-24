@@ -1,0 +1,47 @@
+version: "3"
+# bom limitar dps
+services:
+
+  #  api: &api
+  #    image: rasp.local:5000/duckapi-jvm
+  #    build:
+  #      context: ../../
+  #      dockerfile: infra/docker/duck.dockerfile
+  #    env_file: ../../.env
+  #    networks:
+  #      - duck-network
+
+  #  postgres:
+  #    container_name: Postgres
+  #    image: postgres:16-alpine
+  #    ports:
+  #      - "5432:5432"
+  #    environment:
+  #      PGDATA: /var/lib/postgresql/data/pgdata
+  #      POSTGRES_DB: db_duck
+  #      POSTGRES_USER: duck
+  #      POSTGRES_PASSWORD: duck
+  #    healthcheck:
+  #      test: [ "CMD-SHELL", "pg_isready" ]
+  #      interval: 5s
+  #      timeout: 5s
+  #      retries: 20
+  #      start_period: 10s
+  #    networks:
+  #      - duck-network
+
+  jaeger-all-in-one:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686" # Jaeger UI
+      - "4317:4317"   # OTLP gRPC receiver
+      #- "4318:4318"   # OTLP HTTP receiver, not yet used by Quarkus, optional
+      #- "14268:14268" # Receive legacy OpenTracing traces, optional
+      #- "14250:14250" # Receive from external otel-collector, optional
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    networks:
+      - duck-network
+
+networks:
+  duck-network:

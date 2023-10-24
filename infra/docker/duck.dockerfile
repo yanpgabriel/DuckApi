@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f infra/docker/Duck.Dockerfile -t host:port/duckapi-jvm:latest .
+# docker build -f infra/docker/duck.dockerfile -t host:port/duckapi-jvm:latest .
 # docker push host:port/duckapi-jvm:latest
 #
 # Build in raspberry pi
-# docker buildx build --platform linux/arm64 -f infra/docker/Duck.Dockerfile -t host:port/duckapi-jvm:pi .
+# docker buildx build --platform linux/arm64 -f infra/docker/duck.dockerfile -t host:port/duckapi-jvm:pi .
 # docker push host:port/duckapi-jvm:pi
 #
 # Then run the container using:
